@@ -8,67 +8,73 @@ import DeckScreen from "../screens/DeckScreen";
 import NewCardScreen from "../screens/NewCardScreen";
 import NewDeckScreen from "../screens/NewDeckScreen";
 import QuizScreen from "../screens/QuizScreen";
-import ResetDeckScreen from "../screens/ResetDeckScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import Colors from "../utils/Colors";
 import DeckListScreen from "../screens/DeckListScreen";
 
 const FlashCardsTabsNavigator = createBottomTabNavigator(
-    {
-      Home: {
-        screen: DeckListScreen,
-        navigationOptions: {
+  {
+    Home: {
+      screen: DeckListScreen,
+      navigationOptions: {
         headerTitle: "Flash Cards",
-          tabBarIcon: (tabInfo) => {
-            return (
-              <Ionicons name="home-outline" size={25} color={tabInfo.tintColor} />
-            );
-          },
-        },
-      },
-      NewDeck: {
-        screen: NewDeckScreen,
-        navigationOptions: {
-          tabBarIcon: (tabInfo) => {
-            return (
-              <Ionicons name="add-outline" size={25} color={tabInfo.tintColor} />
-            );
-          },
-          tabBarLabel: "New Deck",
-        },
-      },
-      Reset: {
-        screen: ResetDeckScreen,
-        navigationOptions: {
-          tabBarIcon: (tabInfo) => {
-            return (
-              <Ionicons
-                name="alert-outline"
-                size={25}
-                color={tabInfo.tintColor}
-              />
-            );
-          },
+        tabBarIcon: (tabInfo) => {
+          return (
+            <Ionicons name="home-outline" size={25} color={tabInfo.tintColor} />
+          );
         },
       },
     },
-    {
-      tabBarOptions: {
-        activeTintColor: Colors.secondaryColor,
-        labelStyle: {
-          fontSize: 12,
+    NewDeck: {
+      screen: NewDeckScreen,
+      navigationOptions: {
+        tabBarIcon: (tabInfo) => {
+          return (
+            <Ionicons name="add-outline" size={25} color={tabInfo.tintColor} />
+          );
+        },
+        tabBarLabel: "New Deck",
+      },
+    },
+    Reset: {
+      screen: SettingsScreen,
+      navigationOptions: {
+        tabBarIcon: (tabInfo) => {
+          return (
+            <Ionicons
+              name="settings-outline"
+              size={25}
+              color={tabInfo.tintColor}
+            />
+          );
         },
       },
-    }
-  );
+    },
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: Colors.secondaryColor,
+      labelStyle: {
+        fontSize: 12,
+      },
+    },
+  }
+);
 
 const FlashCardsStackNavigator = createStackNavigator(
   {
-    DeckList: {screen: FlashCardsTabsNavigator, navigationOptions: {
+    DeckList: {
+      screen: FlashCardsTabsNavigator,
+      navigationOptions: {
         headerTitle: "Flash Cards",
-    }},
-    Deck: {screen: DeckScreen,navigationOptions: {
+      },
+    },
+    Deck: {
+      screen: DeckScreen,
+      navigationOptions: {
         headerTitle: "Flash Cards",
-    }},
+      },
+    },
     NewCard: NewCardScreen,
     Quiz: QuizScreen,
   },

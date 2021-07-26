@@ -26,7 +26,3 @@ export const resetDecks = async () => {
     console.warn("ERROR: ", e);
   }
 };
-
-export const sendNotification = () => {
-  setTimeout(() => alert("Time to study!"), 10 * 1000)
-}

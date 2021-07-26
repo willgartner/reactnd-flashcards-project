@@ -22,22 +22,24 @@ const App = (props) => {
   const [fontLoaded, setFontLoaded] = useState(false);
 
   useEffect(() => {
-    sendNotification();
-    // Notifications.scheduleNotificationAsync({
-    //   content: {
-    //     title: "Study Time",
-    //     body: "Don't forget to study your flashcards!"
-    //   },
-    //   trigger: {
-    //     seconds: 30
-    //   }
-    // })
     const loadDecks = async () => {
       const decks = await getDecks();
       setDeckList(decks);
     };
     loadDecks();
   }, []);
+
+  const triggerNotificationHandler = () => {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Study Time",
+        body: "Don't forget to study your flashcards!"
+      },
+      trigger: {
+        seconds: 10
+      }
+    })
+  }
 
   const addCardHandler = (q, a, id) => {
     const newQuestion = new CardData(q, a);
@@ -94,6 +96,7 @@ const App = (props) => {
     <FlashCardsNavigator
       screenProps={{
         deckList,
+        triggerNotificationHandler,
         addCardHandler,
         addDeckHandler,
         deleteDeckHandler,
