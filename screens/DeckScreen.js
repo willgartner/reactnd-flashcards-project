@@ -138,7 +138,7 @@ const touchText = StyleSheet.flatten([
 ]);
 const deleteText = StyleSheet.flatten([
   styles.buttonText,
-  { color: Colors.dangerColor, textDecoration: "underline" },
+  { color: Colors.dangerColor, textDecorationLine: "underline" },
 ]);
 
 export default DeckScreen;
