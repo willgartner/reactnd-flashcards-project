@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as Font from "expo-font";
-import * as Notifications from 'expo-notifications';
+import * as Notifications from "expo-notifications";
 import AppLoading from "expo-app-loading";
 import { enableScreens } from "react-native-screens";
 import { getDecks, saveDecks, resetDecks, sendNotification } from "./utils/Api";
@@ -30,23 +30,30 @@ const App = (props) => {
   }, []);
 
   const triggerNotificationHandler = () => {
-    Notifications.scheduleNotificationAsync({
-      content: {
-        title: "Study Time",
-        body: "Don't forget to study your flashcards!"
-      },
-      trigger: {
-        seconds: 10
-      }
-    })
-  }
+    try {
+      Notifications.scheduleNotificationAsync({
+        content: {
+          title: "Study Time",
+          body: "Don't forget to study your flashcards!",
+        },
+        trigger: {
+          seconds: 10,
+        },
+      });
+    } catch {
+      alert("Don't forget to study your flashcards!");
+    }
+  };
 
   const addCardHandler = (q, a, id) => {
     const newQuestion = new CardData(q, a);
     setDeckList((deck) => {
-      let cards = [...deck]
-      const index = deck.findIndex((item) => item.id === id)
-      const card = {...cards[index], questions: cards[index].questions.concat(newQuestion)}
+      let cards = [...deck];
+      const index = deck.findIndex((item) => item.id === id);
+      const card = {
+        ...cards[index],
+        questions: cards[index].questions.concat(newQuestion),
+      };
       cards[index] = card;
       saveDecks(cards);
       return cards;
@@ -66,12 +73,13 @@ const App = (props) => {
 
   const deleteDeckHandler = (id) => {
     setDeckList((deck) => {
-      const decks = deck.filter((item) => item.id !== id)
+      const decks = deck.filter((item) => item.id !== id);
       const save = async () => {
-        await saveDecks(decks)};
+        await saveDecks(decks);
+      };
       save();
-      return decks
-    })
+      return decks;
+    });
   };
 
   const resetDeckHandler = (id) => {

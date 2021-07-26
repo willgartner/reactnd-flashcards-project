@@ -36,7 +36,7 @@ const FlashCardsTabsNavigator = createBottomTabNavigator(
         tabBarLabel: "New Deck",
       },
     },
-    Reset: {
+    Settings: {
       screen: SettingsScreen,
       navigationOptions: {
         tabBarIcon: (tabInfo) => {
